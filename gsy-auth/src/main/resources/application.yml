@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: service-db
+    name: service-auth
 
 eureka:
   client:
