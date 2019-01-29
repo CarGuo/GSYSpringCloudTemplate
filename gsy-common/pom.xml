@@ -11,8 +11,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gsy-common</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
 
     <modules>
         <module>gsy-db</module>
+        <module>gsy-entity</module>
     </modules>
 </project>

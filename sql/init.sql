@@ -1,9 +1,40 @@
-DROP DATABASE IF EXISTS cloud_template;
-CREATE DATABASE IF NOT EXISTS cloud_template DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-USE cloud_template;
+DROP DATABASE IF EXISTS template_cloud;
+CREATE DATABASE IF NOT EXISTS template_cloud DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-SET FOREIGN_KEY_CHECKS=0;
+USE template_cloud;
+
+SET NAMES utf8;
+SET FOREIGN_KEY_CHECKS = 0;
+
+
+-- ----------------------------
+--  Table structure for `sys_oauth_client_details`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_oauth_client_details`;
+CREATE TABLE `sys_oauth_client_details` (
+  `client_id` varchar(40) NOT NULL,
+  `resource_ids` varchar(256) DEFAULT NULL,
+  `client_secret` varchar(256) DEFAULT NULL,
+  `scope` varchar(256) DEFAULT NULL,
+  `authorized_grant_types` varchar(256) DEFAULT NULL,
+  `web_server_redirect_uri` varchar(256) DEFAULT NULL,
+  `authorities` varchar(256) DEFAULT NULL,
+  `access_token_validity` int(11) DEFAULT NULL,
+  `refresh_token_validity` int(11) DEFAULT NULL,
+  `additional_information` varchar(4096) DEFAULT NULL,
+  `autoapprove` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+--  Records of `sys_oauth_client_details`
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_oauth_client_details` VALUES ('app', null, 'app', 'server', 'password,refresh_token', null, null, null, null, null, 'true'), ('pig', null, 'pig', 'server', 'password,refresh_token,authorization_code', null, null, null, null, null, 'false');
+COMMIT;
+
+
 
 -- ----------------------------
 -- Table structure for user
@@ -66,7 +97,7 @@ INSERT INTO `user_role` VALUES ('3', 3, '1', '代理员', '33', 'proxy',  'proxy
 -- ----------------------------
 
 -- 数据库 --
-ALTER DATABASE cloud_template CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+ALTER DATABASE template_cloud CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- 表 --
 ALTER TABLE user CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
