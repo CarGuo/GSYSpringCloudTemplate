@@ -36,10 +36,11 @@ public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
     private DataSource dataSource;
 
 
-    //@Qualifier("authenticationManagerBean")
+    @Qualifier("authenticationManagerBean")
     private final AuthenticationManager authenticationManagerBean;
 
     @Autowired
+    @Qualifier("userDetailService")
     private UserDetailsService userDetailsService;
 
     @Autowired
