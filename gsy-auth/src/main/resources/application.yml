@@ -32,3 +32,10 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:  # 日志级别
+    org.springframework.web: DEBUG # 配置spring web日志级别
+    org:
+      hibernate:
+        SQL: DEBUG

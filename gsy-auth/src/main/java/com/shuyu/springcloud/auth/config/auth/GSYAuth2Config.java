@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -31,22 +29,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@Order(Integer.MIN_VALUE)
 @EnableAuthorizationServer
 public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    @Qualifier("authenticationManagerBean")
-    private AuthenticationManager authenticationManagerBean;
+
+    //@Qualifier("authenticationManagerBean")
+    private final AuthenticationManager authenticationManagerBean;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
+
+    @Autowired
+    public GSYAuth2Config(AuthenticationManager authenticationManagerBean) {
+        this.authenticationManagerBean = authenticationManagerBean;
+    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -63,8 +65,7 @@ public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
         tokenEnhancerChain.setTokenEnhancers(
                 Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter()));
 
-        endpoints
-                .tokenStore(redisTokenStore())
+        endpoints.tokenStore(redisTokenStore())
                 .tokenEnhancer(tokenEnhancerChain)
                 .authenticationManager(authenticationManagerBean)
                 .reuseRefreshTokens(false)
@@ -81,7 +82,7 @@ public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new NoPasswordEncoder();
     }
 
     @Bean

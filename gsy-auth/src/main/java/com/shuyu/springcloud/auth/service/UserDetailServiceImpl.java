@@ -3,7 +3,6 @@ package com.shuyu.springcloud.auth.service;
 import com.shuyu.springcloud.auth.config.auth.UserDetailsImpl;
 import com.shuyu.springcloud.auth.utils.TestUtils;
 import com.shuyu.springcloud.entity.UserVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

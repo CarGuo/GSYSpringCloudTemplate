@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+
     @Autowired
     private AuthenticationSuccessHandler mobileLoginSuccessHandler;
 
@@ -20,7 +21,7 @@ public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultS
     //private UserService userService;
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    public void configure(HttpSecurity http) {
         MobileAuthenticationFilter mobileAuthenticationFilter = new MobileAuthenticationFilter();
         mobileAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
         mobileAuthenticationFilter.setAuthenticationSuccessHandler(mobileLoginSuccessHandler);
