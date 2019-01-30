@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * 获取用户相关信息，判断用户密码是否正确
+ */
 @Service("userDetailService")
 public class UserDetailServiceImpl implements UserDetailsService {
 

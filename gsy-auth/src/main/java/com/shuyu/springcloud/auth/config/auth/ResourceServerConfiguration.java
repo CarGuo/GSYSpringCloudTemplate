@@ -7,18 +7,26 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+/**
+ * 资源服务器，可配置到各个微服务中
+ */
 @Configuration
 @EnableResourceServer
 class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-
     private static final String DEMO_RESOURCE_ID = "order";
 
+    /**
+     * 资源安全配置
+     */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         resources.resourceId(DEMO_RESOURCE_ID).stateless(true);
     }
 
+    /**
+     * http安全配置
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         // @formatter:off
@@ -32,7 +40,7 @@ class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
                 .anonymous()
                 .and()
                 .authorizeRequests()
-//                    .antMatchers("/product/**").access("#oauth2.hasScope('select') and hasRole('ROLE_USER')")
+                //.antMatchers("/product/**").access("#oauth2.hasScope('select') and hasRole('ROLE_USER')")
                 .antMatchers("/order/**").authenticated();//配置order访问控制，必须认证过后才可以访问
         // @formatter:on
     }

@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+/**
+ * 自定义手机登录成功返回
+ */
 @Slf4j
 @Component
 public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {

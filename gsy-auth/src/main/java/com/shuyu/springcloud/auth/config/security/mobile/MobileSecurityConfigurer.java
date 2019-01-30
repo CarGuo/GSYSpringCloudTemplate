@@ -11,6 +11,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
+/**
+ * 自定义手机登录适配器
+ */
 @Component
 public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
@@ -22,10 +25,13 @@ public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultS
 
     @Override
     public void configure(HttpSecurity http) {
+
+        //配置过滤器
         MobileAuthenticationFilter mobileAuthenticationFilter = new MobileAuthenticationFilter();
         mobileAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
         mobileAuthenticationFilter.setAuthenticationSuccessHandler(mobileLoginSuccessHandler);
 
+        //配置认证校验
         MobileAuthenticationProvider mobileAuthenticationProvider = new MobileAuthenticationProvider();
         //mobileAuthenticationProvider.setUserService(userService);
         http.authenticationProvider(mobileAuthenticationProvider)

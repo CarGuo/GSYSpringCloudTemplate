@@ -7,8 +7,14 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 import java.util.Map;
 
-
+/**
+ * 自定义 Token
+ */
 public class GSYJwtAccessTokenConverter extends JwtAccessTokenConverter {
+
+    /**
+     * 给token信息增加 license
+     */
     @Override
     public Map<String, ?> convertAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
         Map<String, Object> representation = (Map<String, Object>) super.convertAccessToken(token, authentication);

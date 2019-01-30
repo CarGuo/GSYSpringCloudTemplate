@@ -9,7 +9,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-
+/**
+ * 自定义手机登录校验
+ */
 public class MobileAuthenticationProvider implements AuthenticationProvider {
 
     //private UserService userService;
@@ -17,8 +19,16 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         MobileAuthenticationToken mobileAuthenticationToken = (MobileAuthenticationToken) authentication;
+
         //UserVO userVo = userService.findUserByMobile((String) mobileAuthenticationToken.getPrincipal());
+
         UserVO userVo = TestUtils.generateUserVo();
+
+        System.out.print("\n************************************\n");
+        System.out.print("\nMobileAuthenticationProvider\n");
+        System.out.print("\n************************************\n");
+
+
         if (userVo == null) {
             throw new UsernameNotFoundException("手机号不存在:" + mobileAuthenticationToken.getPrincipal());
         }
@@ -39,7 +49,7 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
         return MobileAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
-  /*  public UserService getUserService() {
+    /*public UserService getUserService() {
         return userService;
     }
 

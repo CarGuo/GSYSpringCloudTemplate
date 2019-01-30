@@ -2,6 +2,9 @@ package com.shuyu.springcloud.auth.config.auth;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * 密码不加密处理
+ */
 class NoPasswordEncoder implements PasswordEncoder {
 
     @Override

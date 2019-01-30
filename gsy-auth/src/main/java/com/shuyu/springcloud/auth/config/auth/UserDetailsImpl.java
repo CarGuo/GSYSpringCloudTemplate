@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 用户权限校验对象
+ */
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
     private Integer userId;

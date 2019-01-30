@@ -28,40 +28,65 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 授权服务配置
+ */
 @Configuration
 @EnableAuthorizationServer
-public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
-
-    @Autowired
-    private DataSource dataSource;
+public class GSYOAuth2Config extends AuthorizationServerConfigurerAdapter {
 
 
-    @Qualifier("authenticationManagerBean")
+    /**
+     * 从 Security 注入 AuthenticationManager
+     */
     private final AuthenticationManager authenticationManagerBean;
 
+    /**
+     * 自定义用户密码登录服务
+     */
     @Autowired
     @Qualifier("userDetailService")
     private UserDetailsService userDetailsService;
 
+    /**
+     * 注入 redis 缓存 token
+     */
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
+    /**
+     * 注入 dataSource 用于自定义数据库oauth表
+     */
     @Autowired
-    public GSYAuth2Config(AuthenticationManager authenticationManagerBean) {
+    private DataSource dataSource;
+
+    /**
+     * 构造配置需要注入 AuthenticationManager
+     */
+    @Autowired
+    public GSYOAuth2Config(AuthenticationManager authenticationManagerBean) {
         this.authenticationManagerBean = authenticationManagerBean;
     }
 
+    /**
+     * 配置OAuth2的客户端相关信息
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        //自定义了授权表
         JdbcClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
         clientDetailsService.setSelectClientDetailsSql(SecurityConstants.DEFAULT_SELECT_STATEMENT);
         clientDetailsService.setFindClientDetailsSql(SecurityConstants.DEFAULT_FIND_STATEMENT);
         clients.withClientDetails(clientDetailsService);
     }
 
+    /**
+     * 括配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory等等
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        //token增强配置
+
+        //token增强配置，增加token返回信息
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(
                 Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter()));
@@ -73,6 +98,9 @@ public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
                 .userDetailsService(userDetailsService);
     }
 
+    /**
+     * 安全认证的相关信息，创建ClientCredentialsTokenEndpointFilter 核心过滤器
+     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
@@ -81,11 +109,17 @@ public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
                 .checkTokenAccess("permitAll()");
     }
 
+    /**
+     * 不用密码加密服务
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new NoPasswordEncoder();
     }
 
+    /**
+     * 自定义 Token 信息
+     */
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         GSYJwtAccessTokenConverter jwtAccessTokenConverter = new GSYJwtAccessTokenConverter();
@@ -94,10 +128,9 @@ public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
-     * tokenstore 定制化处理
+     * tokenstore 定制化处理，存入redis
      *
-     * @return TokenStore
-     * 1. 如果使用的 redis-cluster 模式请使用 GSYRedisTokenStore
+     * 如果使用的 redis-cluster 模式请使用 GSYRedisTokenStore
      * GSYRedisTokenStore tokenStore = new GSYRedisTokenStore();
      * tokenStore.setRedisTemplate(redisTemplate);
      */
@@ -110,8 +143,6 @@ public class GSYAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     /**
      * jwt 生成token 定制化处理
-     *
-     * @return TokenEnhancer
      */
     @Bean
     public TokenEnhancer tokenEnhancer() {
