@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * 密码不加密处理
  */
-class NoPasswordEncoder implements PasswordEncoder {
+public class NoPasswordEncoder implements PasswordEncoder {
 
     @Override
     public String encode(CharSequence charSequence) {

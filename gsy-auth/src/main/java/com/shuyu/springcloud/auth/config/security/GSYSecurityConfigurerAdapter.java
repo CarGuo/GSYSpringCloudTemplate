@@ -1,14 +1,19 @@
 package com.shuyu.springcloud.auth.config.security;
 
+import com.shuyu.springcloud.auth.config.auth.NoPasswordEncoder;
 import com.shuyu.springcloud.auth.config.security.mobile.MobileSecurityConfigurer;
+import com.shuyu.springcloud.auth.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * Spring Security 配置
@@ -17,6 +22,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //启用方法级的权限认证
 public class GSYSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+
+    //@Autowired
+    //@Qualifier("userDetailService")
+    //private UserDetailsService userDetailsService;
 
     @Autowired
     public MobileSecurityConfigurer mobileSecurityConfigurer;
@@ -52,4 +61,9 @@ public class GSYSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+    //@Override
+    //protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //auth.userDetailsService(userDetailsService).passwordEncoder(new NoPasswordEncoder());
+    //}
 }
