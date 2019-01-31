@@ -13,9 +13,9 @@ public class AuthUtils {
     private static final String BASIC_ = "Basic ";
 
     /**
-     * 从header 请求中的clientId/clientsecect
+     * 从 header 提取Authorization信息 (clientId:clientSecret 的Base64加密)
      *
-     * @param header header中的参数
+     * @param header header中的参数 (Authorization: Basic YXBwOmFwcA==)
      * @throws CheckedException if the Basic header is not present or is not valid
      *                          Base64
      */
