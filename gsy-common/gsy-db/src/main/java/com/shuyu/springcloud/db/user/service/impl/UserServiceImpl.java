@@ -17,4 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Override
+    public User selectUserByMobile(String mobile) {
+        return baseMapper.selectUserByMobile(mobile);
+    }
+
+    @Override
+    public User selectUserByUsername(String username) {
+        return baseMapper.selectUserByUsername(username);
+    }
 }

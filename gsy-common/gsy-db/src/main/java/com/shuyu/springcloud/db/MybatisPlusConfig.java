@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"com.shuyu.spring.springcloud.db.**.mapper"})
+@MapperScan({"com.shuyu.springcloud.db.**.mapper"})
 public class MybatisPlusConfig {
 
     /**

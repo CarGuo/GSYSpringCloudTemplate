@@ -2,4 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shuyu.springcloud.db.user.mapper.UserMapper">
 
+    <select id="selectUserByUsername"
+            resultType="com.shuyu.springcloud.db.user.entity.User">
+        select * from user where account = #{username} and status != 3
+    </select>
+
+    <select id="selectUserByMobile"
+            resultType="com.shuyu.springcloud.db.user.entity.User">
+        select * from user where phone = #{mobile} and status != 3
+    </select>
+
 </mapper>
