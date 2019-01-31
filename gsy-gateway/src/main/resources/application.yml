@@ -21,6 +21,7 @@ zuul:
     oauth:
       path: /oauth/**
       serviceId: service-auth
+  ## 清空敏感头部，Authorization 才能传递给其他服务
   sensitive-headers:
 
 security:
