@@ -65,8 +65,8 @@ CREATE TABLE `user` (
 -- Records of user  pw 1234.guo.56
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'http://news.cjn.cn/gjxw/201606/W020160622541157378945.jpg', 'admin',     '0b9e162d13f24aa906c930a949e319ae', '8pgby', '猫哥', '1', 'aemail@163.com', '13421754955', 1, '0','0', '1',  0, '2018-12-17 08:49:53', null);
-INSERT INTO `user` VALUES ('2', 'http://news.cjn.cn/gjxw/201606/W020160622541157378945.jpg', 'proxy',     '0b9e162d13f24aa906c930a949e319ae', '8pgby', '狗兄', '1', 'bemail@126.com', '13421754955', 3, '0','0', '1',  0, '2018-12-17 08:49:53', null);
-INSERT INTO `user` VALUES ('3', 'http://news.cjn.cn/gjxw/201606/W020160622541157378945.jpg', 'advert',    '0b9e162d13f24aa906c930a949e319ae', '8pgby', '龟叔', '1', 'cemail@126.com', '13421754955', 2, '0','0', '1',  0, '2018-12-17 08:49:53', null);
+INSERT INTO `user` VALUES ('2', 'http://news.cjn.cn/gjxw/201606/W020160622541157378945.jpg', 'proxy',     '0b9e162d13f24aa906c930a949e319ae', '8pgby', '狗兄', '1', 'bemail@126.com', '13421754957', 3, '0','0', '1',  0, '2018-12-17 08:49:53', null);
+INSERT INTO `user` VALUES ('3', 'http://news.cjn.cn/gjxw/201606/W020160622541157378945.jpg', 'advert',    '0b9e162d13f24aa906c930a949e319ae', '8pgby', '龟叔', '1', 'cemail@126.com', '13421754958', 2, '0','0', '1',  0, '2018-12-17 08:49:53', null);
 
 -- ------------------------`----
 -- Table structure for user_role

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.shuyu.springcloud.db"})
+@ComponentScan(basePackages = {"com.shuyu.springcloud.db", "com.shuyu.springcloud.gsyuserserver"})
 public class GsyUserServerApplication {
 
 	public static void main(String[] args) {

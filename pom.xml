@@ -14,6 +14,7 @@
         <module>gsy-common</module>
         <module>gsy-auth</module>
         <module>gsy-modules</module>
+        <module>gsy-gateway</module>
     </modules>
 
     <parent>

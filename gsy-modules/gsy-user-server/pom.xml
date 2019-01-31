@@ -48,12 +48,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-		<!-- oauth2  -->
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-		</dependency>
-
 		<!-- feign -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
