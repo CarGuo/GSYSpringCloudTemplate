@@ -1,6 +1,9 @@
-
 server:
   port: 8764
+  servlet:
+    session:
+      cookie:
+        name: UISESSION
 
 spring:
   application:
@@ -18,3 +21,22 @@ zuul:
     oauth:
       path: /oauth/**
       serviceId: service-auth
+  sensitive-headers:
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8672/oauth/oauth/token
+      user-authorization-uri: http://localhost:8672/oauth/oauth/authorize
+      client-id: app
+      client-secret: app
+    resource:
+      user-info-uri: http://localhost:${server.port}/oauth/user
+      prefer-token-info: false
+
+logging:
+  level:  # 日志级别
+    org.springframework.web: DEBUG # 配置spring web日志级别
+    org:
+      hibernate:
+        SQL: DEBUG
