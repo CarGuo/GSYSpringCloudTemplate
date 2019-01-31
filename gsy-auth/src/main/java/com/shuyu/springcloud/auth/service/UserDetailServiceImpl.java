@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
- * 获取用户相关信息，判断用户密码是否正确
+ * 获取用户
  */
 @Service("userDetailService")
 public class UserDetailServiceImpl implements UserDetailsService {
@@ -19,6 +19,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
         //UserVO userVo = userService.findUserByUsername(username);
+        // todo userService
         UserVO userVO = TestUtils.generateUserVo();
         if (userVO == null) {
             throw new UsernameNotFoundException("用户名不存在或者密码错误");

@@ -20,10 +20,13 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         MobileAuthenticationToken mobileAuthenticationToken = (MobileAuthenticationToken) authentication;
 
-        //UserVO userVo = userService.findUserByMobile((String) mobileAuthenticationToken.getPrincipal());
+        //TODO 判断code是否为空，是否正确匹配 redis 中的验证码
+
+
+        // todo userService
+        // UserVO userVo = userService.findUserByMobile((String) mobileAuthenticationToken.getPrincipal());
 
         UserVO userVo = TestUtils.generateUserVo();
-
 
         if (userVo == null) {
             throw new UsernameNotFoundException("手机号不存在:" + mobileAuthenticationToken.getPrincipal());
@@ -31,7 +34,7 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
 
         UserDetailsImpl userDetails = buildUserDeatils(userVo);
 
-        MobileAuthenticationToken authenticationToken = new MobileAuthenticationToken(userDetails, userDetails.getAuthorities());
+        MobileAuthenticationToken authenticationToken = new MobileAuthenticationToken(userDetails, authentication.getCredentials(),  userDetails.getAuthorities());
         authenticationToken.setDetails(mobileAuthenticationToken.getDetails());
         return authenticationToken;
     }

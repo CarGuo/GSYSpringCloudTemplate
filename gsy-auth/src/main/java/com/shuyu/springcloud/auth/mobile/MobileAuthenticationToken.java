@@ -13,18 +13,27 @@ public class MobileAuthenticationToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
+    /**
+     * 手机号码
+     */
     private final Object principal;
+    /**
+     * 验证码
+     */
+    private final Object credentials;
 
-    public MobileAuthenticationToken(String mobile) {
+    public MobileAuthenticationToken(String mobile, String code) {
         super(null);
         this.principal = mobile;
+        this.credentials = code;
         setAuthenticated(false);
     }
 
-    public MobileAuthenticationToken(Object principal,
+    public MobileAuthenticationToken(Object principal, Object credentials,
                                      Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
+        this.credentials = credentials;
         super.setAuthenticated(true);
     }
 
@@ -35,7 +44,7 @@ public class MobileAuthenticationToken extends AbstractAuthenticationToken {
 
     @Override
     public Object getCredentials() {
-        return null;
+        return credentials;
     }
 
     @Override

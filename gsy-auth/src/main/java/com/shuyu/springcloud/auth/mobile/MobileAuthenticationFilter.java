@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 public class MobileAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     public static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
+    public static final String SPRING_SECURITY_FORM_CODE_KEY = "code";
 
     private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
+    private String codeParameter = SPRING_SECURITY_FORM_CODE_KEY;
 
     private boolean postOnly = true;
 
@@ -36,14 +38,20 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
         }
 
         String mobile = obtainMobile(request);
+        String code = obtainCode(request);
 
         if (mobile == null) {
             mobile = "";
         }
 
-        mobile = mobile.trim();
+        if (code == null) {
+            code = "";
+        }
 
-        MobileAuthenticationToken mobileAuthenticationToken = new MobileAuthenticationToken(mobile);
+        mobile = mobile.trim();
+        code = code.trim();
+
+        MobileAuthenticationToken mobileAuthenticationToken = new MobileAuthenticationToken(mobile, code);
 
         setDetails(request, mobileAuthenticationToken);
 
@@ -52,6 +60,9 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
 
     protected String obtainMobile(HttpServletRequest request) {
         return request.getParameter(mobileParameter);
+    }
+    protected String obtainCode(HttpServletRequest request) {
+        return request.getParameter(codeParameter);
     }
 
     protected void setDetails(HttpServletRequest request,
