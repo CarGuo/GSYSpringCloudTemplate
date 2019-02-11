@@ -24,20 +24,19 @@ zuul:
   ## 清空敏感头部，Authorization 才能传递给其他服务
   sensitive-headers:
 
-security:
-  oauth2:
-    client:
-      access-token-uri: http://localhost:8672/oauth/oauth/token
-      user-authorization-uri: http://localhost:8672/oauth/oauth/authorize
-      client-id: app
-      client-secret: app
-    resource:
-      user-info-uri: http://localhost:${server.port}/oauth/user
-      prefer-token-info: false
-
 logging:
   level:  # 日志级别
     org.springframework.web: DEBUG # 配置spring web日志级别
     org:
       hibernate:
         SQL: DEBUG
+#---------------------OAuth2---------------------
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:${server.port}/oauth/oauth/token
+      user-authorization-uri: http://localhost:${server.port}/oauth/oauth/authorize
+      client-id: web
+    resource:
+      user-info-uri:  http://localhost:${server.port}/oauth/api/member
+      prefer-token-info: false

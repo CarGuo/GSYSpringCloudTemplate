@@ -24,7 +24,19 @@ public class GSYSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http
+                // 定义哪些URL需要被保护、哪些不需要被保护
+                .authorizeRequests()
+                //打开授权
+                .antMatchers("/oauth/*").permitAll()
+                .and()
+                .authorizeRequests()
+                // 任何请求,登录后可以访问
+                .anyRequest()
+                .authenticated()
+                .and()
+                // 关闭csrf防护
+                .csrf().disable();
     }
 
     /**
