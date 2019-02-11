@@ -8,11 +8,12 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
-@EnableEurekaClient
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 @SpringBootApplication
+@EnableEurekaClient
 @EnableDiscoveryClient
 @EnableZuulProxy
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+//启动单点登录授权
 @EnableOAuth2Sso
 public class GsyGatewayApplication {
 

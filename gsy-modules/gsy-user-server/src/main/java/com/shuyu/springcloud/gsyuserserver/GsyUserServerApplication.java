@@ -2,11 +2,15 @@ package com.shuyu.springcloud.gsyuserserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
 @EnableEurekaClient
+@EnableDiscoveryClient
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan(basePackages = {"com.shuyu.springcloud.db", "com.shuyu.springcloud.gsyuserserver"})
 public class GsyUserServerApplication {
 

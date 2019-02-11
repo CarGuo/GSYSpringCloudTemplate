@@ -30,13 +30,17 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
-#---------------------OAuth2---------------------
+#---------------------OAuth2 SSo autoconfigure---------------------
 security:
   oauth2:
     client:
+      #指定获取access token
       access-token-uri: http://localhost:${server.port}/oauth/oauth/token
+      #去获取access token的URI
       user-authorization-uri: http://localhost:${server.port}/oauth/oauth/authorize
       client-id: web
     resource:
-      user-info-uri:  http://localhost:${server.port}/oauth/api/member
+      user-info-uri:  http://localhost:${server.port}/oauth/user/member
       prefer-token-info: false
+      #token-info-uri和user-info-uri都配置了，更倾向于用哪个
+      #在获得token后，通过userInfoUri里的接口，看看到底有没有返回值，也就是要验证一下token是不是正确的

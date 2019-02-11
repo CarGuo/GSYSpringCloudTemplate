@@ -21,3 +21,13 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+
+security:
+  oauth2:
+    resource:
+      id: service-user
+      #资源服务器配置后，从授权服务器通过token判断用户信息
+      user-info-uri: http://localhost:8764/oauth/user/member
+      prefer-token-info: false
+      #token-info-uri和user-info-uri都配置了，更倾向于用哪个
+      #在获得token后，通过userInfoUri里的接口，看看到底有没有返回值，也就是要验证一下token是不是正确的
