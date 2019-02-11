@@ -35,6 +35,7 @@
         <mysql-connector.version>5.1.46</mysql-connector.version>
         <spring-auth.version>2.3.4.RELEASE</spring-auth.version>
         <spring-security-crypto.version>5.0.6.RELEASE</spring-security-crypto.version>
+        <fastjson.version>1.2.56</fastjson.version>
     </properties>
 
     <dependencies>
@@ -94,6 +95,12 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-crypto</artifactId>
                 <version>${spring-security-crypto.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
         </dependencies>

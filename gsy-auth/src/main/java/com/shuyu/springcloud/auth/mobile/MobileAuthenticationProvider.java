@@ -2,6 +2,8 @@
 package com.shuyu.springcloud.auth.mobile;
 
 import com.shuyu.springcloud.auth.config.auth.UserDetailsImpl;
+import com.shuyu.springcloud.auth.feign.UserService;
+import com.shuyu.springcloud.auth.utils.OAuthUtils;
 import com.shuyu.springcloud.auth.utils.TestUtils;
 import com.shuyu.springcloud.entity.UserVO;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class MobileAuthenticationProvider implements AuthenticationProvider {
 
-    //private UserService userService;
+    private UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -22,11 +24,9 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
 
         //TODO 判断code是否为空，是否正确匹配 redis 中的验证码
 
+        Object obj = userService.findUserByMobile((String) mobileAuthenticationToken.getPrincipal());
+        UserVO userVo = OAuthUtils.getUserVoByMap(obj);
 
-        // todo userService
-        // UserVO userVo = userService.findUserByMobile((String) mobileAuthenticationToken.getPrincipal());
-
-        UserVO userVo = TestUtils.generateUserVo();
 
         if (userVo == null) {
             throw new UsernameNotFoundException("手机号不存在:" + mobileAuthenticationToken.getPrincipal());
@@ -48,11 +48,11 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
         return MobileAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
-    /*public UserService getUserService() {
+    public UserService getUserService() {
         return userService;
     }
 
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }*/
+    }
 }

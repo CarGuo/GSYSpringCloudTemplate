@@ -37,7 +37,7 @@ public class UserVO implements Serializable {
     /**
      * 0-正常，1-删除
      */
-    private String delFlag;
+    private Integer delFlag;
     /**
      * 简介
      */

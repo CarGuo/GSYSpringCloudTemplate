@@ -18,7 +18,7 @@ public class SysRole implements Serializable {
     private String roleDesc;
     private Date createTime;
     private Date updateTime;
-    private String delFlag;
+    private Integer delFlag;
 
     @Override
     public String toString() {

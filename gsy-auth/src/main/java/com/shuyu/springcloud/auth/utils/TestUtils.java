@@ -17,7 +17,7 @@ public class TestUtils {
         userVO.setSalt("uf555");
         userVO.setCreateTime(new Date());
         userVO.setUpdateTime(new Date());
-        userVO.setDelFlag("0");
+        userVO.setDelFlag(0);
         userVO.setPhone("13421854952");
         userVO.setAvatar("xxxxxxxx");
         userVO.setDeptId(1244111);

@@ -2,6 +2,7 @@
 
 package com.shuyu.springcloud.auth.mobile;
 
+import com.shuyu.springcloud.auth.feign.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -20,8 +21,8 @@ public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultS
     @Autowired
     private AuthenticationSuccessHandler mobileLoginSuccessHandler;
 
-    //@Autowired
-    //private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Override
     public void configure(HttpSecurity http) {
@@ -33,7 +34,7 @@ public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultS
 
         //配置认证校验
         MobileAuthenticationProvider mobileAuthenticationProvider = new MobileAuthenticationProvider();
-        //mobileAuthenticationProvider.setUserService(userService);
+        mobileAuthenticationProvider.setUserService(userService);
         http.authenticationProvider(mobileAuthenticationProvider)
                 .addFilterAfter(mobileAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }

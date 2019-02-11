@@ -34,7 +34,7 @@ public class UserController {
     @GetMapping("/findUserByMobile/{mobile}")
     public Object findUserByMobile(@PathVariable String mobile) {
         User user = userService.selectUserByMobile(mobile);
-        return ResponseUtil.ok(ConversionUtils.converUserToDto(user));
+        return ResponseUtil.ok(ConversionUtils.conversionUserToDto(user));
     }
 
     /**
@@ -45,7 +45,7 @@ public class UserController {
     @GetMapping("/findUserByUsername/{username}")
     public Object findUserByUsername(@PathVariable String username) {
         User user = userService.selectUserByUsername(username);
-        return ResponseUtil.ok(ConversionUtils.converUserToDto(user));
+        return ResponseUtil.ok(ConversionUtils.conversionUserToDto(user));
     }
 
 
